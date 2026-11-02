@@ -1,0 +1,56 @@
+{
+  "name": "plotworks",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate",
+    "db:up": "docker compose up -d db",
+    "db:migrate": "prisma migrate dev",
+    "db:policies": "prisma db execute --file prisma/sql/001_rls_and_integrity.sql --schema prisma/schema.prisma",
+    "db:deploy": "prisma migrate deploy && npm run db:policies",
+    "db:seed": "tsx --env-file=.env prisma/seed.ts",
+    "db:setup": "prisma migrate dev --name init && npm run db:policies && npm run db:seed",
+    "db:reset": "prisma migrate reset --force --skip-seed && npm run db:policies && npm run db:seed",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest",
+    "@prisma/client": "6.16.2",
+    "bcryptjs": "3.0.2",
+    "clsx": "2.1.1",
+    "lucide-react": "1.57.0",
+    "next": "15.5.28",
+    "next-auth": "5.0.0-beta.29",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "server-only": "0.0.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1",
+    "@tailwindcss/postcss": "4.1.13",
+    "@types/node": "22.18.6",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
+    "prisma": "6.16.2",
+    "tailwindcss": "4.1.13",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  },
+  "allowScripts": {
+    "prisma@6.16.2": true,
+    "@prisma/client@6.16.2": true,
+    "@prisma/engines@6.16.2": true,
+    "@tailwindcss/oxide@4.1.13": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "sharp@0.34.5": true
+  }
+}

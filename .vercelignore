@@ -1,0 +1,9 @@
+# Never upload secrets or local build output when deploying with the Vercel CLI.
+.env
+.env*.local
+.next
+node_modules
+test-results
+playwright-report
+tsconfig.tsbuildinfo
+.claude
